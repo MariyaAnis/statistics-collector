@@ -1,11 +1,12 @@
 import os
 import time
-import requests
 
+import requests
 from django.shortcuts import get_object_or_404
+from dotenv import load_dotenv
+
 from cities.models import City
 from weather.models import Weather
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -17,10 +18,13 @@ def save_weather(request):
         lat = city.lat
         lon = city.lon
         try:
-            url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&exclude=current&units=metric&appid={api_key}'
+            url = (f'https://api.openweathermap.org/data/2.5/weather?'
+                   f'lat={lat}&lon={lon}&exclude=current&'
+                   f'units=metric&appid={api_key}'
+                   )
             response = requests.get(url).json()
         except requests.exceptions.ConnectionError:
-            return('Error, сайт не доступен')
+            return 'Error, сайт не доступен'
 
         try:
             weather = get_object_or_404(Weather, city=city.id)
