@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  collector:
+    image: postgres:13.0-alpine
+    volumes:
+      - /var/lib/postgresql/data/
+    env_file:
+      - .env
+  web:
+    build: .
+    restart: always
+    depends_on:
+      - collector
+    env_file:
+      - ./.env
