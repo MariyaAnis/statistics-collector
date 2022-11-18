@@ -62,7 +62,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'collector.wsgi.application'
+WSGI_APPLICATION = 'collector.wsgi.application'
 
 
 # Database
