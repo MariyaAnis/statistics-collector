@@ -14,10 +14,6 @@ services:
       - db
     env_file:
       - .env
-#    command: >
-#      sh -c "python3 manage.py collectstatic --noinput &&
-#             python3 manage.py migrate &&
-#             python3 manage.py import_cities Cities.csv"
 
   nginx:
     image: nginx:1.21.3-alpine

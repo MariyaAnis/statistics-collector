@@ -2,13 +2,6 @@
 
 Данный модуль собирает статистику актуальной температуры по городам с сайта https://openweathermap.org/
 
-При желании приложение можно расширить дла сбора актуальной информации:
--о ветре 
-Например, для ипользования ветрегонераторов и предсказания их мощности или определение опасности шторма.
-Об облочности, 
-для определения условий работы солнечных батарей, управлением уровня освещения
-Об времени воссхода и заката солна
-для определения времени автоматического включения дополнительного освещения.
 
 
 ## Подготовка и запуск проекта
@@ -51,19 +44,19 @@ sudo docker-compose up -d --build
 * После успешной сборки выполните команды:
     - Соберите статические файлы:
     ```
-    sudo docker-compose exec backend python manage.py collectstatic --noinput
+    sudo docker-compose exec web python manage.py collectstatic --noinput
     ```
     - Примените миграции:
     ```
-    sudo docker-compose exec backend python manage.py migrate --noinput
+    sudo docker-compose exec web python manage.py migrate --noinput
     ```
     - Загрузите города  в базу данных (необязательно):
     ```
-    sudo docker-compose exec backend python manage.py load_ingredients <Название файла из директории data>
+    sudo docker-compose exec web python3 manage.py import_cities Cities.csv
     ```
     - Создать суперпользователя Django:
     ```
-    sudo docker-compose exec backend python manage.py createsuperuser
+    sudo docker-compose exec web python manage.py createsuperuser
     ```
-    - Проект будет доступен по вашему IP
+    - Проект будет доступен по локальному хосту 127.0.0.1
   
