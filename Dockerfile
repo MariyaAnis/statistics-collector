@@ -4,5 +4,4 @@ RUN apt update && apt -y install libpq-dev build-essential
 COPY requirements.txt ./
 RUN pip3 install -r requirements.txt --no-cache-dir
 COPY . .
-WORKDIR collector
-CMD [ "gunicorn", "--bind", "0:8000", "collector.wsgi"]
+CMD ["gunicorn", "--bind", "0:8000", "collector.wsgi:application"]
