@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  collector:
+  db:
     image: postgres:13.0-alpine
     volumes:
       - /var/lib/postgresql/data/
@@ -11,13 +11,18 @@ services:
     build: .
     restart: always
     depends_on:
-      - collector
+      - db
     env_file:
       - .env
+#    command: >
+#      sh -c "python3 manage.py collectstatic --noinput &&
+#             python3 manage.py migrate &&
+#             python3 manage.py import_cities Cities.csv"
+
   nginx:
     image: nginx:1.21.3-alpine
     ports:
-      - "80"
+      - "80:80"
 
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
